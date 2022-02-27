@@ -32,7 +32,7 @@ class AppModule extends Module {
     ChildRoute(
       '/cart',
       child: (context, args) => CartPage(
-        product: args.data, list: [],
+        product: args.data, list: const [],
       ),
     ),
   ];

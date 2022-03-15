@@ -16,22 +16,38 @@
 // ignore_for_file: unnecessary_new
 
 import 'package:flutter/material.dart';
-import 'package:online_shop_app/features/presentation/pages/navpages/main_page.dart';
-import 'package:online_shop_app/features/presentation/pages/welcome_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:online_shop_app/2ndpage/db/db_helper.dart';
+import 'package:online_shop_app/cubitz/app_cubit_logics.dart';
+import 'package:online_shop_app/features/data/repositories/food_repository.dart';
 
-void main() => runApp(const MyApp());
+import 'cubitz/app_cubits.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await DBHelper.initDb();
+  // await GetStorage.init();
+  //
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: 'Flutter Demo',
+    return new GetMaterialApp(
+      title: 'Flutr ndnsDemo',
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MainPage(),
+      home: BlocProvider<AppCubits>(
+        create: (context) => AppCubits(
+          data: FoodRepository(),
+        ),
+        child: const AppCubitLogics(),
+      ),
     );
   }
 }

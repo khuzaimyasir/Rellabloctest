@@ -1,7 +1,7 @@
-part of 'product_bloc.dart';
+// part of 'product_bloc.dart';
 
-@freezed
-class ProductEvent with _$ProductEvent {
-  const factory ProductEvent.started() = ProductStartedEvent;
+// @freezed
+// class ProductEvent with _$ProductEvent {
+//   const factory ProductEvent.started() = ProductStartedEvent;
 
-}
+// }

@@ -8,7 +8,7 @@ class MyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text(" youtube page")
+      child: Text(" youtubee page")
     );
   }
 }

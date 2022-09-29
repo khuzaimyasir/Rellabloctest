@@ -7,7 +7,6 @@ import 'package:online_shop_app/features/data/models/channel_models.dart';
 
 import '../../../data/models/video_models.dart';
 
-
 class APIService {
   APIService._instantiate();
 
@@ -20,7 +19,7 @@ class APIService {
     Map<String, String> parameters = {
       'part': 'snippet, contentDetails, statistics',
       'id': channelId,
-      'key': 'AIzaSyB9nfppklP-ZGFvBstff42LmZdbG4j2U-M',
+      'key': 'your key ',
     };
     Uri uri = Uri.https(
       _baseUrl,
@@ -54,11 +53,11 @@ class APIService {
       'playlistId': playlistId,
       'maxResults': '8',
       'pageToken': _nextPageToken,
-      'key': 'AIzaSyB9nfppklP-ZGFvBstff42LmZdbG4j2U-M',
+      'key': 'your key ',
     };
     Uri uri = Uri.https(
       _baseUrl,
-      '/youtube/v3/playlistItems',
+      '//v3/playlistItems',
       parameters,
     );
     Map<String, String> headers = {

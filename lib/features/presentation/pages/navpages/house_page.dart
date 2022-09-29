@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:online_shop_app/cartpage/cart_screen.dart';
 import 'package:online_shop_app/features/presentation/widgets/app_large_text.dart';
+import 'package:online_shop_app/features/presentation/widgets/responsive_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../cubitz/app_cubit_states.dart';
@@ -113,44 +115,42 @@ class _HousePageState extends State<HousePage> with TickerProviderStateMixin {
                           ),
                         ),
                         // Headless Cms data instead of raw texts
-                        Stack(
-                          children:[
+                        Stack(children: [
                           Card(
-                                color: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  side: const BorderSide(
-                                      color: Colors.white, width: 2.0),
-                                  borderRadius: BorderRadius.circular(25.0),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: <Widget>[
-                                    Padding(
-                                        padding: const EdgeInsets.all(100.0),
-                                        child: TextButton.icon(
-                                          icon: const Icon(
-                                              Icons.add_to_home_screen),
-                                          label: const Text(
-                                            "Inquiries",
-                                            style: TextStyle(
-                                                fontSize: 25,
-                                                color: Colors.purple),
-                                          ),
-                                          onPressed: () => launch(
-                                              "https://www.instagram.com/tlamanagement/?hl=en"),
-                                        )),
-                                  ],
-                                ),
-                              ),
-                            const SizedBox(height: 10,),
-                              const Text("Hi everyone! My name is Natalie Barbu.I am the founder of Rella, an all-in-one management tool for influencers to run their business. I post behind-the-scenes content, try to provide value as much as I can, vlog, and share the insights of my life. Make sure to subscribe so you can see more videos from me.For Inquires Tap inquires",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold
-                          ),),
-                            ]  ),
-         
-                        
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              side: const BorderSide(
+                                  color: Colors.white, width: 2.0),
+                              borderRadius: BorderRadius.circular(25.0),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: <Widget>[
+                                Padding(
+                                    padding: const EdgeInsets.all(100.0),
+                                    child: TextButton.icon(
+                                      icon:
+                                          const Icon(Icons.add_to_home_screen),
+                                      label: const Text(
+                                        "Inquiries",
+                                        style: TextStyle(
+                                            fontSize: 25, color: Colors.purple),
+                                      ),
+                                      onPressed: () => launch(
+                                          "https://www.instagram.com/tlamanagement/?hl=en"),
+                                    )),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          const Text(
+                            "Hi everyone! My name is Natalie Barbu.I am the founder of Rella, an all-in-one management tool for influencers to run their business. I post behind-the-scenes content, try to provide value as much as I can, vlog, and share the insights of my life. Make sure to subscribe so you can see more videos from me.For Inquires Tap inquires",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ]),
+
                         // Container(
                         //   width: 200,
                         //   height: 300,
@@ -297,10 +297,11 @@ class _HousePageState extends State<HousePage> with TickerProviderStateMixin {
                       height: 10,
                     ),
                     Container(
-                      height: 100,
+                      height: 150,
                       width: double.maxFinite,
                       margin: const EdgeInsets.only(
-                        left: 20,
+                        left: 10,
+                        right: 10,
                       ),
                       child: ListView.builder(
                           itemCount: info.length,
@@ -311,24 +312,37 @@ class _HousePageState extends State<HousePage> with TickerProviderStateMixin {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Container(
-                                    width: 80,
-                                    height: 80,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Colors.white,
-                                      image: DecorationImage(
-                                        image: CachedNetworkImageProvider(
-                                            info[index].imageUrl),
-                                        fit: BoxFit.cover,
+                                  GestureDetector(
+                                    onTap: () {
+                                      BlocProvider.of<AppCubits>(context)
+                                          .getonefood(info[index]);
+                                    },
+                                    child: Stack(children: [
+                                      Container(
+                                        width: MediaQuery.of(context).size.width/3,
+                                        // media query /3
+                                        height: 120,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          color: Colors.white,
+                                          image: DecorationImage(
+                                            image: CachedNetworkImageProvider(
+                                                info[index].imageUrl),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
                                       ),
-                                    ),
+                                    ]),
+                                    // const Text("bloc state"),
                                   ),
-                                  const Text("bloc state"),
                                 ],
                               ),
                             );
                           }),
+                    ),
+                    const SizedBox(
+                      height: 20,
                     ),
                     Container(
                       margin: const EdgeInsets.only(left: 20, right: 20),
@@ -358,39 +372,76 @@ class _HousePageState extends State<HousePage> with TickerProviderStateMixin {
                     ),
                     // wrap with singlechildscrollview when item count is index
                     Container(
-                      height: 100,
+                      height: 400,
                       width: double.maxFinite,
                       margin: const EdgeInsets.only(
                         left: 20,
                       ),
                       child: ListView.builder(
                           itemCount: 4,
-                          scrollDirection: Axis.horizontal,
+                          scrollDirection: Axis.vertical,
                           itemBuilder: (_, index) {
-                            return Container(
-                              margin: const EdgeInsets.only(right: 30),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    width: 80,
-                                    height: 80,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Colors.white,
-                                      image: DecorationImage(
-                                        image: CachedNetworkImageProvider(
-                                          images.elementAt(index),
+                            return Ink(
+                              child: Container(
+                                margin: const EdgeInsets.only(right: 30),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Card(
+                                      child: Container(
+                                        width: 80,
+                                        height: 80,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          color: Colors.white,
+                                          image: DecorationImage(
+                                            image: CachedNetworkImageProvider(
+                                              images.elementAt(index),
+                                            ),
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
-                                        fit: BoxFit.cover,
                                       ),
                                     ),
-                                  ),
-                                  const Text("youtube"),
-                                ],
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const Text("youtube"),
+                                          const Text("9992"),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Row(
+                                      children: [
+                                        IconButton(
+                                            onPressed: (() {}),
+                                            icon: Icon(
+                                              Icons.remove_circle_outline,
+                                            )),
+                                        Text("1"),
+                                        IconButton(
+                                            onPressed: (() {}),
+                                            icon: Icon(
+                                              Icons.add_circle_rounded,
+                                            )),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             );
-                          }),
+                            
+                          }
+                          ),
                     ),
                   ],
                 ),

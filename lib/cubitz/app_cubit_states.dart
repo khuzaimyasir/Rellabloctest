@@ -25,3 +25,10 @@ class LoadedState extends CubitStates {
   @override
   List<Object?> get props => [];
 }
+
+class DetailState extends CubitStates {
+  DetailState(this.place);
+  final Recipe place;
+  @override
+  List<Object?> get props => [place];
+}

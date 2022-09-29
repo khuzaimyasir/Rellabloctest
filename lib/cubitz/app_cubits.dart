@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:online_shop_app/cubitz/app_cubit_states.dart';
+import 'package:online_shop_app/features/data/models/food.dart';
 import 'package:online_shop_app/features/data/repositories/food_repository.dart';
 
 class AppCubits extends Cubit<CubitStates> {
@@ -13,9 +14,15 @@ class AppCubits extends Cubit<CubitStates> {
     try {
       emit(LoadingState());
       places = await data.getFoods();
- emit(LoadedState(places));
-    } catch (e) {
+      emit(LoadedState(places));
+    } catch (e) {}
+  }
 
-    }
+  getonefood(Recipe data) {
+    emit(DetailState(data));
+  }
+
+  goHome() {
+    emit(LoadedState(places));
   }
 }

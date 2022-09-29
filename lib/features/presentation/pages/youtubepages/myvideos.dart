@@ -30,7 +30,7 @@ class _MyVideosState extends State<MyVideos> {
 
   _initChannel() async {
     Channel channel = await APIService.instance
-        .fetchChannel(channelId: 'UC-27McNXi7E4Z3H1kZnTjzg');
+        .fetchChannel(channelId: 'your key');
     setState(() {
       _channel = channel;
     });

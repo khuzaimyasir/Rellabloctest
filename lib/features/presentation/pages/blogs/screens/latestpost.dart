@@ -18,6 +18,11 @@ class _LatestPostState extends State<LatestPost> {
       child: FutureBuilder<List>(
         future: postService.getAllPost(),
         builder: (context, snapshot) {
+          if (snapshot.hasError) {
+  return const Center(
+                child: Text("Error occoured.Check your internet connectivity or restart app.🥲"),
+              );
+          }
           if (snapshot.hasData) {
             if (snapshot.data?.length == 0) {
               return const Center(

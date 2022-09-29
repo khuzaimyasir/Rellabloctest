@@ -38,3 +38,4 @@ increase, decrease and remove product.
 - Add animations
 - Polish the UI
 - Integrate a remote storage 
+# rellamanagement
